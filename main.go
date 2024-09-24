@@ -23,6 +23,7 @@ func main() {
 		Use:   "goji",
 		Short: "Create custom or random text emojis",
 		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Print("\033[H\033[2J")
 			showMainMenu()
 		},
 	}
@@ -129,7 +130,7 @@ func createRandomEmoji() {
 	emoji := fmt.Sprintf("%s %s %s %s %s %s %s", leftArm, "(", leftEye, mouth, rightEye, ")", rightArm)
 	// Clear terminal
 	fmt.Print("\033[H\033[2J")
-	
+
 	fmt.Println("Random emoji generated:", emoji)
 
 	// Prompt to copy the emoji to clipboard
