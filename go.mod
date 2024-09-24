@@ -1,4 +1,4 @@
-module goji
+module github.com/sanriodev/goji
 
 go 1.23.1
 
