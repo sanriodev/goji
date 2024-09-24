@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/atotto/clipboard"
 	"github.com/eiannone/keyboard"
 	"github.com/spf13/cobra"
 )
@@ -44,17 +45,16 @@ func createEmoji() {
 	defer keyboard.Close()
 
 	leftArm := pickPart(leftArms, "Pick a left arm:")
-
 	leftEye := pickPart(eyes, "Pick a left eye:")
-
 	mouth := pickPart(mouths, "Pick a mouth:")
-
 	rightEye := pickPart(eyes, "Pick a right eye:")
-
 	rightArm := pickPart(rightArms, "Pick a right arm:")
 
 	emoji := fmt.Sprintf("%s %s %s %s %s %s %s", leftArm, "(", leftEye, mouth, rightEye, ")", rightArm)
 	fmt.Println("Your custom emoji:", emoji)
+
+	// Prompt to copy the emoji to clipboard
+	copyToClipboard(emoji)
 }
 
 func pickPart(options []string, message string) string {
@@ -93,8 +93,9 @@ func pickPart(options []string, message string) string {
 			fmt.Println("Exiting...")
 			os.Exit(0)
 		}
-					
-					fmt.Print("\033[H\033[2J")
+
+		// Clear terminal
+		fmt.Print("\033[H\033[2J")
 	}
 	return options[selectedIndex]
 }
@@ -107,5 +108,23 @@ func displayOptions(options []string, selectedIndex int) {
 		} else {
 			fmt.Printf("  %s\n", option)
 		}
+	}
+}
+
+func copyToClipboard(emoji string) {
+	fmt.Println("Do you want to copy this emoji to the clipboard? (y/n)")
+
+	var input string
+	fmt.Scanln(&input)
+
+	if input == "y" || input == "Y" {
+		err := clipboard.WriteAll(emoji)
+		if err != nil {
+			fmt.Println("Error copying to clipboard:", err)
+		} else {
+			fmt.Println("Emoji copied to clipboard!")
+		}
+	} else {
+		fmt.Println("Emoji not copied.")
 	}
 }
