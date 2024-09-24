@@ -8,6 +8,7 @@ import (
 
 	"github.com/atotto/clipboard"
 	"github.com/eiannone/keyboard"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -44,9 +45,8 @@ func showMainMenu() {
 	menuOptions := []string{"Create New Emoji", "Create Random Emoji", "Exit"}
 
 	selectedIndex := 0
-
 	for {
-		fmt.Println(`
+		printBue(`
       ___         ___                       
      /\__\       /\  \      ___             
     /:/ _/_     /::\  \    /\__\    ___     
@@ -87,11 +87,11 @@ func showMainMenu() {
 			case 1:
 				createRandomEmoji()
 			case 2:
-				fmt.Println("Exiting...")
+				printRed("Exiting...")
 				os.Exit(0)
 			}
 		case keyboard.KeyEsc:
-			fmt.Println("Exiting...")
+			printRed("Exiting...")
 			os.Exit(0)
 		}
 
@@ -127,6 +127,9 @@ func createRandomEmoji() {
 	rightArm := rightArms[rand.Intn(len(rightArms))]
 
 	emoji := fmt.Sprintf("%s %s %s %s %s %s %s", leftArm, "(", leftEye, mouth, rightEye, ")", rightArm)
+	// Clear terminal
+	fmt.Print("\033[H\033[2J")
+	
 	fmt.Println("Random emoji generated:", emoji)
 
 	// Prompt to copy the emoji to clipboard
@@ -159,7 +162,7 @@ func pickPart(options []string, message string) string {
 			fmt.Print("\033[H\033[2J")
 			return options[selectedIndex]
 		case keyboard.KeyEsc:
-			fmt.Println("Exiting...")
+			printRed("Exiting...")
 			os.Exit(0)
 		}
 
@@ -195,4 +198,14 @@ func copyToClipboard(emoji string) {
 	} else {
 		fmt.Println("Emoji not copied.")
 	}
+}
+
+func printBue(text string) {
+	c := color.New(color.FgBlue)
+	c.Println(text)
+}
+
+func printRed(text string) {
+	c := color.New(color.FgRed)
+	c.Println(text)
 }
