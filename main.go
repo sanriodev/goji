@@ -4,17 +4,17 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/spf13/cobra"
 )
 
 // Define available characters for each part of the emoji
-var leftArms = []string{"(", "<", "[", "{"}
-var rightArms = []string{")", ">", "]", "}"}
-var leftEyes = []string{"o", "O", "^", "-", "*", "x"}
-var rightEyes = []string{"o", "O", "^", "-", "*", "x"}
-var mouths = []string{"_", ".", "v", "o", "O"}
+var leftArms = []string{"٩", "∿", "☝", "<"}
+var rightArms = []string{"۶", "∿", "☝", ">"}
+var eyes = []string{"o", "O", "^", "◕", "•", "°", "ʘ"}
+var mouths = []string{"O", "‿", ".̫ ", "⊖", "ω", "ʖ"}
 
 func main() {
 	var rootCmd = &cobra.Command{Use: "gomoji"}
@@ -42,19 +42,19 @@ func createEmoji() {
 	leftArm := pickPart(reader, leftArms)
 
 	fmt.Println("Pick a left eye:")
-	leftEye := pickPart(reader, leftEyes)
+	leftEye := pickPart(reader, eyes)
 
 	fmt.Println("Pick a mouth:")
 	mouth := pickPart(reader, mouths)
 
 	fmt.Println("Pick a right eye:")
-	rightEye := pickPart(reader, leftEyes)
+	rightEye := pickPart(reader, eyes)
 
 	fmt.Println("Pick a right arm:")
 	rightArm := pickPart(reader, rightArms)
 
 	// Generate and display the final emoji
-	emoji := fmt.Sprintf("%s%s%s%s%s", leftArm, leftEye, mouth, rightEye, rightArm)
+	emoji := fmt.Sprintf("%s%s%s%s%s%s%s", leftArm, "(", leftEye, mouth, rightEye, ")", rightArm)
 	fmt.Println("Your custom emoji:", emoji)
 }
 
@@ -65,18 +65,13 @@ func pickPart(reader *bufio.Reader, options []string) string {
 
 	fmt.Print("Enter the number for your choice: ")
 	choiceStr, _ := reader.ReadString('\n')
-	fmt.Println(choiceStr)
-	choiceStr = strings.TrimSpace(choiceStr)
+	choiceStr = strings.TrimSpace(choiceStr) // Remove any trailing newlines or spaces
 
-	choiceIndex, err := stringToInt(choiceStr)
+	choiceIndex, err := strconv.Atoi(choiceStr) // Convert the string to an integer
 	if err != nil || choiceIndex < 1 || choiceIndex > len(options) {
 		fmt.Println("Invalid choice, please try again.")
 		return pickPart(reader, options)
 	}
 
 	return options[choiceIndex-1]
-}
-
-func stringToInt(str string) (int, error) {
-	return fmt.Sscanf(str, "%d")
 }
