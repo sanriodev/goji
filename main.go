@@ -175,7 +175,7 @@ func pickPart(options []string, message string) string {
 func displayOptions(options []string, selectedIndex int) {
 	for i, option := range options {
 		if i == selectedIndex {
-			fmt.Printf("> %s\n", option)
+			printSelected("> %s\n", option)
 		} else {
 			fmt.Printf("  %s\n", option)
 		}
@@ -203,6 +203,11 @@ func copyToClipboard(emoji string) {
 func printBue(text string) {
 	c := color.New(color.FgBlue)
 	c.Println(text)
+}
+
+func printSelected(format string, text string) {
+	c := color.New(color.FgGreen)
+	c.Printf(format, text)
 }
 
 func printRed(text string) {
