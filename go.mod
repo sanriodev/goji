@@ -1,4 +1,4 @@
-module gomoji
+module goji
 
 go 1.23.1
 

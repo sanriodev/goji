@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
+	"time"
 
 	"github.com/atotto/clipboard"
 	"github.com/eiannone/keyboard"
@@ -16,17 +18,13 @@ var eyes = []string{"o", "O", "^", "◕", "•", "°", "ʘ"}
 var mouths = []string{"O", "‿", ".̫ ", "⊖", "ω", "ʖ"}
 
 func main() {
-	var rootCmd = &cobra.Command{Use: "gomoji"}
-
-	var newCmd = &cobra.Command{
-		Use:   "new",
-		Short: "Create a new text emoji",
+	var rootCmd = &cobra.Command{
+		Use:   "goji",
+		Short: "Create custom or random text emojis",
 		Run: func(cmd *cobra.Command, args []string) {
-			createEmoji()
+			showMainMenu()
 		},
 	}
-
-	rootCmd.AddCommand(newCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
@@ -34,15 +32,76 @@ func main() {
 	}
 }
 
-func createEmoji() {
-	fmt.Println("Use arrow keys to select and press Enter to confirm.")
-
+func showMainMenu() {
 	// Open the keyboard for capturing inputs
 	if err := keyboard.Open(); err != nil {
 		fmt.Println("Error:", err)
 		return
 	}
 	defer keyboard.Close()
+
+	// Main menu options
+	menuOptions := []string{"Create New Emoji", "Create Random Emoji", "Exit"}
+
+	selectedIndex := 0
+
+	for {
+		fmt.Println(`
+      ___         ___                       
+     /\__\       /\  \      ___             
+    /:/ _/_     /::\  \    /\__\    ___     
+   /:/ /\  \   /:/\:\  \  /:/__/   /\__\    
+  /:/ /::\  \ /:/  \:\  \/::\  \  /:/__/    
+ /:/__\/\:\__/:/__/ \:\__\/\:\  \/::\  \    
+ \:\  \ /:/  \:\  \ /:/  /~~\:\  \/\:\  \__ 
+  \:\  /:/  / \:\  /:/  /    \:\__~~\:\/\__\
+   \:\/:/  /   \:\/:/  /     /:/  /  \::/  /
+    \::/  /     \::/  /     /:/  /   /:/  / 
+     \/__/       \/__/      \/__/    \/__/  
+`)
+		fmt.Println("Select an option:")
+		displayOptions(menuOptions, selectedIndex)
+
+		// Read the keyboard input
+		char, key, err := keyboard.GetKey()
+		if err != nil {
+			fmt.Println("Error reading key and char:", err, char)
+			break
+		}
+
+		// Handle key input for menu
+		switch key {
+		case keyboard.KeyArrowUp:
+			if selectedIndex > 0 {
+				selectedIndex--
+			}
+		case keyboard.KeyArrowDown:
+			if selectedIndex < len(menuOptions)-1 {
+				selectedIndex++
+			}
+		case keyboard.KeyEnter:
+			fmt.Print("\033[H\033[2J")
+			switch selectedIndex {
+			case 0:
+				createEmoji()
+			case 1:
+				createRandomEmoji()
+			case 2:
+				fmt.Println("Exiting...")
+				os.Exit(0)
+			}
+		case keyboard.KeyEsc:
+			fmt.Println("Exiting...")
+			os.Exit(0)
+		}
+
+		// Clear terminal after each key press
+		fmt.Print("\033[H\033[2J")
+	}
+}
+
+func createEmoji() {
+	fmt.Println("Use arrow keys to select and press Enter to confirm.")
 
 	leftArm := pickPart(leftArms, "Pick a left arm:")
 	leftEye := pickPart(eyes, "Pick a left eye:")
@@ -57,39 +116,49 @@ func createEmoji() {
 	copyToClipboard(emoji)
 }
 
+func createRandomEmoji() {
+	// Generate random selections for emoji parts
+	rand.Seed(time.Now().UnixNano())
+
+	leftArm := leftArms[rand.Intn(len(leftArms))]
+	leftEye := eyes[rand.Intn(len(eyes))]
+	mouth := mouths[rand.Intn(len(mouths))]
+	rightEye := eyes[rand.Intn(len(eyes))]
+	rightArm := rightArms[rand.Intn(len(rightArms))]
+
+	emoji := fmt.Sprintf("%s %s %s %s %s %s %s", leftArm, "(", leftEye, mouth, rightEye, ")", rightArm)
+	fmt.Println("Random emoji generated:", emoji)
+
+	// Prompt to copy the emoji to clipboard
+	copyToClipboard(emoji)
+}
+
 func pickPart(options []string, message string) string {
 	selectedIndex := 0
 
 	for {
 		fmt.Println(message)
-		// Display options with highlighting for the current selection
 		displayOptions(options, selectedIndex)
 
-		// Read the keyboard input
 		char, key, err := keyboard.GetKey()
 		if err != nil {
 			fmt.Println("Error reading key and char:", err, char)
 			break
 		}
 
-		// Handle key input
 		switch key {
 		case keyboard.KeyArrowUp:
-			// Move up in the selection list
 			if selectedIndex > 0 {
 				selectedIndex--
 			}
 		case keyboard.KeyArrowDown:
-			// Move down in the selection list
 			if selectedIndex < len(options)-1 {
 				selectedIndex++
 			}
 		case keyboard.KeyEnter:
-			// Confirm selection with Enter
 			fmt.Print("\033[H\033[2J")
 			return options[selectedIndex]
 		case keyboard.KeyEsc:
-			// Exit on ESC (optional)
 			fmt.Println("Exiting...")
 			os.Exit(0)
 		}
@@ -103,7 +172,6 @@ func pickPart(options []string, message string) string {
 func displayOptions(options []string, selectedIndex int) {
 	for i, option := range options {
 		if i == selectedIndex {
-			// Highlight the selected option
 			fmt.Printf("> %s\n", option)
 		} else {
 			fmt.Printf("  %s\n", option)
