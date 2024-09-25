@@ -1,6 +1,12 @@
-# goji ٩(◕‿◕)۶
+<h2 align="center">goji ٩(◕‿◕)۶</h2>
 
-lightweight version of Oji. but written in go!
+<h4 align="center">lightweight version of Oji. but written in go!</h4>
+
+<p align="center">
+<img src="./assets/goji.gif" alt="GIF">
+</p>
+
+##
 
 ## Prerequisites
 
