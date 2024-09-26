@@ -18,12 +18,6 @@
 go install github.com/sanriodev/goji@latest
 ```
 
-or
-
-```bash
-go install github.com/sanriodev/goji@v1.1.0
-```
-
 ## Usage
 
 ```bash
