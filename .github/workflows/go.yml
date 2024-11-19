@@ -6,14 +6,7 @@ on:
 
 permissions:
   contents: write
-brews:
-  - tap:
-      owner: sanriodev
-      name: goji-brewtap
-    folder: Formula
-    homepage: 'https://github.com/sanriodev/goji'
-    description: 'goji binaries for brew.'
-    license: 'MIT'
+
 jobs:
   goreleaser:
     runs-on: ubuntu-latest

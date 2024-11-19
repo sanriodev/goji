@@ -1,0 +1,8 @@
+brews:
+  - tap:
+      owner: sanriodev
+      name: goji-brewtap
+    folder: Formula
+    homepage: 'https://github.com/sanriodev/goji'
+    description: 'goji binaries for brew.'
+    license: 'MIT'
