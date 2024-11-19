@@ -3,7 +3,7 @@ brews:
       owner: sanriodev
       name: goji-brewtap
       branch: brew-releases/{{ .Version }}
-      token: '{{ .Env.GITHUB_TOKEN }}'
+      token: '{{ .Env.TOKEN }}'
     commit_author:
       name: goreleaserbot
       email: goreleaserbot@example.com
