@@ -29,7 +29,7 @@ func CreateCustomEmoji() {
 	emoji := fmt.Sprintf("%s %s %s %s %s %s %s", leftArm, "(", leftEye, mouth, rightEye, ")", rightArm)
 	fmt.Println("Your custom emoji:", emoji)
 
-	util.CopyToClipboard(emoji)
+	util.CopyToClipboard(emoji, false)
 }
 
 func CreateRandomEmoji() {
@@ -45,7 +45,7 @@ func CreateRandomEmoji() {
 	fmt.Print("\033[H\033[2J")
 
 	fmt.Println("Random emoji generated:", emoji)
-	util.CopyToClipboard(emoji)
+	util.CopyToClipboard(emoji, false)
 }
 
 func DisplayOptions(options []string, selectedIndex, startIndex int) {
