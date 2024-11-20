@@ -17,7 +17,7 @@ func ShowMainMenu() {
 		return
 	}
 	defer keyboard.Close()
-	menuOptions := []string{"Create New Emoji", "Create Random Emoji", "List Favorites", "Exit"}
+	menuOptions := []string{"Create New Emoji", "Create Random Emoji", "Copy from Favorites", "Exit"}
 	selectedIndex := 0
 	startIndex := 0
 
@@ -67,7 +67,7 @@ func ShowMainMenu() {
 			case 1:
 				emoji.CreateRandomEmoji()
 			case 2:
-				listFavorites()
+				PickFavorite()
 				os.Exit(0)
 			case 3:
 				util.PrintRed("Exiting...")
@@ -81,7 +81,7 @@ func ShowMainMenu() {
 	}
 }
 
-func listFavorites() {
+/* func listFavorites() {
 	favorites := util.LoadFavorites()
 
 	if len(favorites.Emojis) == 0 {
@@ -93,5 +93,56 @@ func listFavorites() {
 	for i, emoji := range favorites.Emojis {
 		emojiStr := fmt.Sprintf("%d: %s", i+1, emoji.Content)
 		util.PrintBlue(emojiStr)
+	}
+} */
+
+func PickFavorite() {
+	favorites := util.LoadFavorites()
+
+	if len(favorites.Emojis) == 0 {
+		fmt.Println("No favorite emojis saved yet!")
+		return
+	}
+
+	selectedIndex := 0
+	startIndex := 0
+
+	for {
+		fmt.Println("Pick a favorite emoji to copy:")
+		emoji.DisplayOptions(util.GetFavoriteContents(favorites), selectedIndex, startIndex)
+
+		// Capture user input
+		char, key, err := keyboard.GetKey()
+		if err != nil {
+			fmt.Println("Error reading key:", err, char)
+			break
+		}
+
+		switch key {
+		case keyboard.KeyArrowUp:
+			if selectedIndex > 0 {
+				selectedIndex--
+				if selectedIndex < startIndex {
+					startIndex--
+				}
+			}
+		case keyboard.KeyArrowDown:
+			if selectedIndex < len(favorites.Emojis)-1 {
+				selectedIndex++
+				if selectedIndex >= startIndex+maxVisibleOptions {
+					startIndex++
+				}
+			}
+		case keyboard.KeyEnter:
+			emoji := favorites.Emojis[selectedIndex].Content
+			util.CopyToClipboard(emoji, true)
+			return
+		case keyboard.KeyEsc:
+			fmt.Println("Exiting favorites menu.")
+			return
+		}
+
+		// Clear terminal after each key press
+		fmt.Print("\033[H\033[2J")
 	}
 }

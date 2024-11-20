@@ -64,3 +64,11 @@ func LoadFavorites() definitions.Favorites {
 
 	return favorites
 }
+
+func GetFavoriteContents(favorites definitions.Favorites) []string {
+	contents := make([]string, len(favorites.Emojis))
+	for i, emoji := range favorites.Emojis {
+		contents[i] = emoji.Content
+	}
+	return contents
+}
