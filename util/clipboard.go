@@ -7,7 +7,12 @@ import (
 )
 
 func CopyToClipboard(emoji string, cannotReSave bool) {
-	fmt.Println("Do you want to copy this emoji to the clipboard? (y/n/save)")
+
+	if cannotReSave {
+		fmt.Println("Do you want to copy this emoji to the clipboard? (y/n)")
+	} else {
+		fmt.Println("Do you want to copy this emoji to the clipboard? (y/n/save)")
+	}
 
 	var input string
 	fmt.Scanln(&input)
