@@ -32,6 +32,10 @@ brew tap sanriodev/homebrew-goji
 ```bash
 brew install goji
 ```
+
+### homebrew formula
+
+take a look at the homebrew formula for goji [here.](https://github.com/sanriodev/homebrew-goji)
 ## Usage
 
 ```bash
