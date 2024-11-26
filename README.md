@@ -4,10 +4,6 @@
 </p>
 <h4 align="center">lightweight version of Oji. but written in go!</h4>
 
-<p align="center">
-<img src="./assets/goji.gif" alt="GIF">
-</p>
-
 ##
 
 # Prerequisites
