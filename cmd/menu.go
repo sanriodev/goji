@@ -97,6 +97,10 @@ func ShowMainMenu() {
 } */
 
 func PickFavorite() {
+	if err := keyboard.Open(); err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	favorites := util.LoadFavorites()
 
 	if len(favorites.Emojis) == 0 {

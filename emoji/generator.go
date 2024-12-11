@@ -18,6 +18,10 @@ var mouths = []string{"O", "‿", ".̫ ", "⊖", "ω", "ʖ", "﹏", "▽", "益"
 const maxVisibleOptions = 6
 
 func CreateCustomEmoji() {
+	if err := keyboard.Open(); err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	fmt.Println("Use arrow keys to select and press Enter to confirm.")
 
 	leftArm := PickPart(leftArms, "Pick a left arm:")
