@@ -11,6 +11,7 @@ import (
 var newFlag bool
 var randomFlag bool
 var favoritesFlag bool
+var gopherFlag bool
 
 var rootCmd = &cobra.Command{
 	Use:   "goji",
@@ -23,6 +24,8 @@ var rootCmd = &cobra.Command{
 			emoji.CreateRandomEmoji()
 		} else if favoritesFlag {
 			PickFavorite()
+		} else if gopherFlag {
+			ShowGopher()
 		} else {
 			ShowMainMenu()
 		}
@@ -33,6 +36,7 @@ func init() {
 	rootCmd.Flags().BoolVarP(&newFlag, "new", "n", false, "Create a new emoji")
 	rootCmd.Flags().BoolVarP(&randomFlag, "random", "r", false, "Create a random emoji")
 	rootCmd.Flags().BoolVarP(&favoritesFlag, "favorites", "f", false, "Pick from favorites")
+	rootCmd.Flags().BoolVarP(&gopherFlag, "gopher", "g", false, "an easter egg")
 }
 
 func Execute() {
