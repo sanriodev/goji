@@ -81,6 +81,23 @@ func ShowMainMenu() {
 	}
 }
 
+func ShowGopher() {
+	util.PrintBlue(`
+      ´.-::::::-.´
+  .:-::::::::::::::-:.
+  ´_:::    ::    :::_´
+   .:( ^   :: ^   ):.
+   ´:::   (..)   :::.
+   ´:::::::UU:::::::´
+   .::::::::::::::::.
+   O::::::::::::::::O
+   -::::::::::::::::-
+   ´::::::::::::::::´
+    .::::::::::::::.
+      oO:::::::Oo
+`)
+}
+
 /* func listFavorites() {
 	favorites := util.LoadFavorites()
 
@@ -97,6 +114,10 @@ func ShowMainMenu() {
 } */
 
 func PickFavorite() {
+	if err := keyboard.Open(); err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	favorites := util.LoadFavorites()
 
 	if len(favorites.Emojis) == 0 {
