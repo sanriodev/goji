@@ -4,6 +4,15 @@
 </p>
 <h4 align="center">lightweight version of Oji. but written in go!</h4>
 
+<div align="center">
+
+|                                                                                     Go-Report                                                                                      |                                                                                    Reference                                                                                    |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![Go Report Card](https://goreportcard.com/badge/github.com/sanriodev/goji)](https://goreportcard.com/report/github.com/sanriodev/goji) | [![GoDoc](https://godoc.org/github.com/sanriodev/goji?status.svg)](https://godoc.org/github.com/sanriodev/goji) |
+
+</div>
+
+
 ##
 
 # Prerequisites
