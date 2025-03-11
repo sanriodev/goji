@@ -1,4 +1,4 @@
-<h2 align="center">goji ٩(◕‿◕)۶</h2>
+<h2 align="center">(づ｡◕w◕｡)づ goji</h2>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/cc2ca9b5-5f0d-4749-8671-4a7d7afa50c3">
 </p>
