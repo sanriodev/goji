@@ -1,7 +1,7 @@
 <h2 align="center">(づ｡◕w◕｡)づ goji</h2>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/9094aa2d-92ca-4667-9c86-6837a9f08352" style="height: 200px">
-  
+<img src="https://github.com/user-attachments/assets/ad170f49-554e-45b3-9b7c-35f00ef4a6c6" style="height: 200px">
+
 </p>
 
 <h4 align="center">lightweight version of Oji. but written in go!</h4>
