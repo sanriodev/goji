@@ -1,8 +1,19 @@
-<h2 align="center">goji ٩(◕‿◕)۶</h2>
+<h2 align="center">(づ｡◕w◕｡)づ goji</h2>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/cc2ca9b5-5f0d-4749-8671-4a7d7afa50c3">
+<img src="https://github.com/user-attachments/assets/ad170f49-554e-45b3-9b7c-35f00ef4a6c6" style="height: 200px">
+
 </p>
+
 <h4 align="center">lightweight version of Oji. but written in go!</h4>
+
+<div align="center">
+
+|                                                                                     Go-Report                                                                                      |                                                                                    Reference                                                                                    |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![Go Report Card](https://goreportcard.com/badge/github.com/sanriodev/goji)](https://goreportcard.com/report/github.com/sanriodev/goji) | [![GoDoc](https://godoc.org/github.com/sanriodev/goji?status.svg)](https://godoc.org/github.com/sanriodev/goji) |
+
+</div>
+
 
 ##
 
