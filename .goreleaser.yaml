@@ -6,7 +6,8 @@ brews:
       # token: '{{ .Env.TOKEN }}'
     custom_block: |
       test do
-        system "#{bin}/goji --gopher"
+        output = shell_output("#{bin}/goji -n")
+        assert_match(/Use arrow keys to select and press Enter to confirm\./, output)
       end
     commit_author:
       name: Matteo Juen
