@@ -70,11 +70,11 @@ func ShowMainMenu() {
 				PickFavorite()
 				os.Exit(0)
 			case 3:
-				util.PrintRed("Exiting...")
+				util.PrintRed("see you next time >.<")
 				os.Exit(0)
 			}
 		case keyboard.KeyEsc:
-			util.PrintRed("Exiting...")
+			util.PrintRed("see you next time >.<")
 			os.Exit(0)
 		}
 		fmt.Print("\033[H\033[2J")
