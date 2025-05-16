@@ -4,10 +4,22 @@ brews:
       name: homebrew-goji
       branch: brew-releases/{{ .Version }}
       # token: '{{ .Env.TOKEN }}'
+    url_template: "https://github.com/sanriodev/goji/archive/refs/tags/{{ .Tag }}.tag.gz"
+    install: |
+     def install
+       system "go", "build", *std_go_args
+     end
+    custom_block: |
+     test do
+       output = shell_output("#{bin}/goji -h")
+       assert_match(/Create custom or random text emojis/, output)
+       assert_match(/--new/, output)
+       assert_match(/--random/, output)
+     end
     commit_author:
       name: Matteo Juen
       email: matteo.juen@ematric.com
     folder: Formula
     homepage: 'https://github.com/sanriodev/goji'
-    description: 'goji binaries for brew.'
+    description: 'Lightweight version of Oji text emoticon generator. Rewritten in go'
     license: 'MIT'

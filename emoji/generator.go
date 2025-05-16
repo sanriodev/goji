@@ -24,11 +24,22 @@ func CreateCustomEmoji() {
 	}
 	fmt.Println("Use arrow keys to select and press Enter to confirm.")
 
-	leftArm := PickPart(leftArms, "Pick a left arm:")
-	leftEye := PickPart(eyes, "Pick a left eye:")
-	mouth := PickPart(mouths, "Pick a mouth:")
-	rightEye := PickPart(eyes, "Pick a right eye:")
-	rightArm := PickPart(rightArms, "Pick a right arm:")
+	leftArm := PickPart(leftArms, "Pick a left arm:", "")
+
+	currentEmoji := fmt.Sprintf("%s %s", leftArm, "(")
+
+	leftEye := PickPart(eyes, "Pick a left eye:", currentEmoji)
+
+	currentEmoji = fmt.Sprintf("%s %s %s", leftArm, "(", leftEye)
+
+	mouth := PickPart(mouths, "Pick a mouth:", currentEmoji)
+	currentEmoji = fmt.Sprintf("%s %s %s %s", leftArm, "(", leftEye, mouth)
+
+	rightEye := PickPart(eyes, "Pick a right eye:", currentEmoji)
+
+	currentEmoji = fmt.Sprintf("%s %s %s %s %s %s", leftArm, "(", leftEye, mouth, rightEye, ")")
+
+	rightArm := PickPart(rightArms, "Pick a right arm:", currentEmoji)
 
 	emoji := fmt.Sprintf("%s %s %s %s %s %s %s", leftArm, "(", leftEye, mouth, rightEye, ")", rightArm)
 	fmt.Println("Your custom emoji:", emoji)
@@ -67,14 +78,15 @@ func DisplayOptions(options []string, selectedIndex, startIndex int) {
 	}
 }
 
-func PickPart(options []string, message string) string {
+func PickPart(options []string, message string, currentEmoji string) string {
 	selectedIndex := 0
 	startIndex := 0
 
 	for {
 		fmt.Println(message)
 		DisplayOptions(options, selectedIndex, startIndex)
-		util.PrintBlue("move up or down to display more choices")
+
+		util.PrintBlue(fmt.Sprintf("move up or down to display more choices: %s %s", currentEmoji, options[selectedIndex]))
 		char, key, err := keyboard.GetKey()
 		if err != nil {
 			fmt.Println("Error reading key and char:", err, char)
@@ -100,7 +112,7 @@ func PickPart(options []string, message string) string {
 			fmt.Print("\033[H\033[2J")
 			return options[selectedIndex]
 		case keyboard.KeyEsc:
-			util.PrintRed("Exiting...")
+			util.PrintRed("see you next time >.<")
 			os.Exit(0)
 		}
 
