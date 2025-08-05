@@ -4,11 +4,10 @@ brews:
       name: homebrew-goji
       branch: brew-releases/{{ .Version }}
       # token: '{{ .Env.TOKEN }}'
-    url_template: "https://github.com/sanriodev/goji/archive/refs/tags/{{ .Tag }}.tag.gz"
+    url_template: "https://github.com/sanriodev/goji/archive/refs/tags/{{ .Tag }}.tar.gz"
+    
     install: |
-     def install
-       system "go", "build", *std_go_args
-     end
+     system "go", "build", *std_go_args
     custom_block: |
      test do
        output = shell_output("#{bin}/goji -h")
