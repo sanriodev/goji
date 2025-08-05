@@ -1,10 +1,10 @@
-<h2 align="center">(づ｡◕w◕｡)づ goji</h2>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/ad170f49-554e-45b3-9b7c-35f00ef4a6c6" style="height: 200px">
 
 </p>
 
 <h4 align="center">lightweight version of Oji. but written in go!</h4>
+<h4 align="center">Your favorite command line text-emoticon generator.</h4>
 
 <div align="center">
 
