@@ -30,7 +30,7 @@ go install github.com/sanriodev/goji@latest
 ## Installation via homebrew 🍺
 
 ```bash
-brew tap sanriodev/homebrew-goji && brew install goji
+brew tap sanriodev/goji && brew install goji
 ```
 
 ### formula
