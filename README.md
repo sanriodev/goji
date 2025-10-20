@@ -3,7 +3,7 @@
 
 </p>
 
-<h4 align="center">lightweight version of Oji. but written in go!</h4>
+<h4 align="center">lightweight version of <a target="_blank" href="https://github.com/xxczaki/oji">Oji</a>. but written in go!</h4>
 <h4 align="center">Your favorite command line text-emoticon generator.</h4>
 
 <div align="center">
